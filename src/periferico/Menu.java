@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import periferico.controller.PerifericoController;
+import periferico.model.PerifericoMouse;
 import periferico.model.PerifericoTeclado;
 import periferico.util.Colors;
 
@@ -14,30 +15,28 @@ public class Menu {
 		PerifericoController periferico = new PerifericoController();
 		Scanner leia = new Scanner(System.in);
 
-		int opcao, idproduto, tipo, estoque, numero;
+		int opcao, idproduto, tipo, estoque, numero, dpimouse;
 		String nomeproduto, marcaproduto, rgbteclado, construcaoteclado;
 		float preco;
 
 		// LISTA DE PRODUTOS COMENTADA PARA FACILIDADE
-
+		
 		/*
-		 * Perifericos de TESTE PerifericoTeclado teclado1 = new
-		 * PerifericoTeclado(periferico.criarNumero(), 1, "80HE", "Woothing", 2000.00F,
-		 * 5, "SIM", "SIM"); periferico.adicionarPeriferico(teclado1);
-		 * 
-		 * PerifericoTeclado teclado2 = new PerifericoTeclado(periferico.criarNumero(),
-		 * 1, "G715 TKL", "Logitech", 800.00F, 5, "SIM", "SIM");
-		 * periferico.adicionarPeriferico(teclado2);
-		 * 
-		 * PerifericoTeclado teclado3 = new PerifericoTeclado(periferico.criarNumero(),
-		 * 1, "Alloy Origins", "HyperX", 499.00F, 5, "SIM", "SIM");
-		 * periferico.adicionarPeriferico(teclado3);
-		 * 
-		 * PerifericoTeclado teclado4 = new PerifericoTeclado(periferico.criarNumero(),
-		 * 1, "Alloy Core", "HyperX", 279.00F, 5, "NÃO", "SIM");
-		 * periferico.adicionarPeriferico(teclado4);
-		 */
+		PerifericoTeclado teclado1 = new PerifericoTeclado(periferico.criarNumero(), 1, "80HE", "Woothing", 2000.00F, 5,"SIM", "SIM");
+		periferico.adicionarPeriferico(teclado1);
 
+		PerifericoTeclado teclado2 = new PerifericoTeclado(periferico.criarNumero(), 1, "G715 TKL", "Logitech", 800.00F, 5, "SIM", "SIM");
+		periferico.adicionarPeriferico(teclado2);
+
+		PerifericoMouse mouse1 = new PerifericoMouse(periferico.criarNumero(), 2, "EC1 CW", "Zowie", 1000.00F, 5, 800);
+		periferico.adicionarPeriferico(mouse1);
+
+		PerifericoMouse mouse2 = new PerifericoMouse(periferico.criarNumero(), 2, "Atlantis Pro Mini", "Lamzu", 279.00F,5, 1600);
+		periferico.adicionarPeriferico(mouse2);
+		
+		periferico.listarPerifericos();
+		*/
+		
 		while (true) {
 			System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_RED_BACKGROUND);
 			System.out.println("------------------------------------------");
@@ -86,7 +85,7 @@ public class Menu {
 				do {
 					System.out.println("Digite o código do tipo do produto: ");
 					tipo = leia.nextInt();
-				} while (tipo != 1);
+				} while (tipo < 1 && tipo > 2);
 
 				System.out.println("Digite o nome do periférico");
 				leia.skip("\\R?");
@@ -105,7 +104,14 @@ public class Menu {
 
 					System.out.println("O teclado possui RGB? (SIM/NÃO): ");
 					rgbteclado = leia.next();
-					periferico.adicionarPeriferico(new PerifericoTeclado(periferico.criarNumero(), tipo, marcaproduto, nomeproduto, preco, estoque, construcaoteclado, construcaoteclado));
+					periferico.adicionarPeriferico(new PerifericoTeclado(periferico.criarNumero(), tipo, marcaproduto,
+							nomeproduto, preco, estoque, construcaoteclado, construcaoteclado));
+				}
+				case 2 -> {
+					System.out.println("Qual o DPI do Mouse: ");
+					dpimouse = leia.nextInt();
+					periferico.adicionarPeriferico(new PerifericoMouse(periferico.criarNumero(), tipo, marcaproduto,
+							nomeproduto, preco, estoque, dpimouse));
 				}
 
 				}
@@ -113,8 +119,8 @@ public class Menu {
 				keyPress();
 				break;
 			case 2:
-				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Liste todos os periféricos\n");
-
+				System.out
+						.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Liste todos os periféricos\n");
 				periferico.listarPerifericos();
 
 				keyPress();
@@ -130,7 +136,8 @@ public class Menu {
 				keyPress();
 				break;
 			case 4:
-				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Atualização de dados dos periféricos\n");
+				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND
+						+ "Atualização de dados dos periféricos\n");
 
 				System.out.println("Digite o ID do produto");
 				numero = leia.nextInt();
@@ -146,7 +153,7 @@ public class Menu {
 					do {
 						System.out.println("Digite o código do tipo do produto: ");
 						tipo = leia.nextInt();
-					} while (tipo != 1);
+					} while (tipo < 1 && tipo > 2);
 
 					System.out.println("Digite a marca do periferico:");
 					marcaproduto = leia.next();
@@ -164,7 +171,14 @@ public class Menu {
 
 						System.out.println("O teclado possui RGB? (SIM/NÃO): ");
 						rgbteclado = leia.next();
-						periferico.atualizarPeriferico(new PerifericoTeclado(numero, tipo, marcaproduto, nomeproduto,preco, estoque, construcaoteclado, rgbteclado));
+						periferico.atualizarPeriferico(new PerifericoTeclado(numero, tipo, marcaproduto, nomeproduto,
+								preco, estoque, construcaoteclado, rgbteclado));
+					}
+					case 2 -> {
+						System.out.println("Qual o DPI do Mouse: ");
+						dpimouse = leia.nextInt();
+						periferico.atualizarPeriferico(
+								new PerifericoMouse(numero, tipo, marcaproduto, nomeproduto, preco, estoque, dpimouse));
 					}
 
 					}
