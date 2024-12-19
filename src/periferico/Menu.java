@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import periferico.model.PerifericoTeclado;
 import periferico.util.Colors;
 
 public class Menu {
@@ -12,6 +13,12 @@ public class Menu {
 
 		int opcao;
 		Scanner leia = new Scanner(System.in);
+		PerifericoTeclado teste = new PerifericoTeclado(1,1,"80HE", "Woothing", 80.00F, 5, true,true );
+		//PerifericoTeclado teste = new PerifericoTeclado(1,2, "Woothing", "80HE", 80.00F, 5, 1,1 );
+		
+		teste.visualizar();
+		
+		
 
 		while (true) {
 			System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_RED_BACKGROUND);
