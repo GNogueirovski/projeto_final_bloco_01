@@ -31,8 +31,8 @@ public class PerifericoTeclado extends Periferico {
 
 	public void visualizar() {
 		super.visualizar();
-		System.out.printf("Teclado é mecânico ou de membrana: %s\n", this.construcaoteclado);
-		System.out.printf("Teclado com RGB: %s\n", this.rgbteclado);
+		System.out.printf("O teclado é mecânico? (SIM/NÃO): : %s\n", this.construcaoteclado);
+		System.out.printf("O teclado possui RGB? (SIM/NÃO): %s\n", this.rgbteclado);
 		
 
 	}

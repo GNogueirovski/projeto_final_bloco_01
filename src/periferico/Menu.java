@@ -21,21 +21,21 @@ public class Menu {
 
 		// LISTA DE PRODUTOS COMENTADA PARA FACILIDADE
 		
-		/*
+		
 		PerifericoTeclado teclado1 = new PerifericoTeclado(periferico.criarNumero(), 1, "80HE", "Woothing", 2000.00F, 5,"SIM", "SIM");
 		periferico.adicionarPeriferico(teclado1);
 
+		PerifericoMouse mouse1 = new PerifericoMouse(periferico.criarNumero(), 2, "EC1 CW", "Zowie", 1000.00F, 5, 800);
+		periferico.adicionarPeriferico(mouse1);
+		
 		PerifericoTeclado teclado2 = new PerifericoTeclado(periferico.criarNumero(), 1, "G715 TKL", "Logitech", 800.00F, 5, "SIM", "SIM");
 		periferico.adicionarPeriferico(teclado2);
 
-		PerifericoMouse mouse1 = new PerifericoMouse(periferico.criarNumero(), 2, "EC1 CW", "Zowie", 1000.00F, 5, 800);
-		periferico.adicionarPeriferico(mouse1);
 
 		PerifericoMouse mouse2 = new PerifericoMouse(periferico.criarNumero(), 2, "Atlantis Pro Mini", "Lamzu", 279.00F,5, 1600);
 		periferico.adicionarPeriferico(mouse2);
 		
 		periferico.listarPerifericos();
-		*/
 		
 		while (true) {
 			System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_RED_BACKGROUND);
