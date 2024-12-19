@@ -1,10 +1,10 @@
 package periferico.model;
 
 public class PerifericoTeclado extends Periferico {
-	private boolean construcaoteclado;
-	private boolean rgbteclado;
+	private String construcaoteclado;
+	private String rgbteclado;
 
-	public PerifericoTeclado(int idproduto, int tipo, String nomeproduto,String marcaproduto, float preco, int estoque, boolean construcaoteclado, boolean rgbteclado)
+	public PerifericoTeclado(int idproduto, int tipo, String marcaproduto,String nomeproduto, float preco, int estoque, String construcaoteclado, String rgbteclado)
 	{
 		super(idproduto, tipo, marcaproduto, nomeproduto, preco, estoque);
 		this.construcaoteclado = construcaoteclado;
@@ -13,39 +13,26 @@ public class PerifericoTeclado extends Periferico {
 	}
 
 
-	public boolean isConstrucaoteclado() {
+	public String isConstrucaoteclado() {
 		return construcaoteclado;
 	}
 
-	public void setConstrucaoteclado(boolean construcaoteclado) {
+	public void setConstrucaoteclado(String construcaoteclado) {
 		this.construcaoteclado = construcaoteclado;
 	}
 
-	public boolean getRgbteclado() {
+	public String getRgbteclado() {
 		return rgbteclado;
 	}
 
-	public void setRgbteclado(boolean rgbteclado) {
+	public void setRgbteclado(String rgbteclado) {
 		this.rgbteclado = rgbteclado;
 	}
 
 	public void visualizar() {
 		super.visualizar();
-		String rgbtexto;
-		String construcao;
-		if (rgbteclado = true) {
-			rgbtexto = "Sim";
-		} else {
-			rgbtexto = "Não";
-		}
-		if (construcaoteclado = true) {
-			construcao = "Mecânico";
-		} else {
-			construcao = "Membrana";
-		}
-
-		System.out.printf("Teclado é mecânico ou de membrana: %s\n", construcao);
-		System.out.printf("Teclado com RGB: %s possui\n", rgbtexto);
+		System.out.printf("Teclado é mecânico ou de membrana: %s\n", this.construcaoteclado);
+		System.out.printf("Teclado com RGB: %s\n", this.rgbteclado);
 		
 
 	}

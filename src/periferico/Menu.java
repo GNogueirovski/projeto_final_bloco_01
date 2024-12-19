@@ -4,21 +4,39 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import periferico.controller.PerifericoController;
 import periferico.model.PerifericoTeclado;
 import periferico.util.Colors;
 
 public class Menu {
 
 	public static void main(String[] args) {
-
-		int opcao;
+		PerifericoController periferico = new PerifericoController();
 		Scanner leia = new Scanner(System.in);
-		PerifericoTeclado teste = new PerifericoTeclado(1,1,"80HE", "Woothing", 80.00F, 5, true,true );
-		//PerifericoTeclado teste = new PerifericoTeclado(1,2, "Woothing", "80HE", 80.00F, 5, 1,1 );
-		
-		teste.visualizar();
-		
-		
+
+		int opcao, idproduto, tipo, estoque, numero;
+		String nomeproduto, marcaproduto, rgbteclado, construcaoteclado;
+		float preco;
+
+		// LISTA DE PRODUTOS COMENTADA PARA FACILIDADE
+
+		/*
+		 * Perifericos de TESTE PerifericoTeclado teclado1 = new
+		 * PerifericoTeclado(periferico.criarNumero(), 1, "80HE", "Woothing", 2000.00F,
+		 * 5, "SIM", "SIM"); periferico.adicionarPeriferico(teclado1);
+		 * 
+		 * PerifericoTeclado teclado2 = new PerifericoTeclado(periferico.criarNumero(),
+		 * 1, "G715 TKL", "Logitech", 800.00F, 5, "SIM", "SIM");
+		 * periferico.adicionarPeriferico(teclado2);
+		 * 
+		 * PerifericoTeclado teclado3 = new PerifericoTeclado(periferico.criarNumero(),
+		 * 1, "Alloy Origins", "HyperX", 499.00F, 5, "SIM", "SIM");
+		 * periferico.adicionarPeriferico(teclado3);
+		 * 
+		 * PerifericoTeclado teclado4 = new PerifericoTeclado(periferico.criarNumero(),
+		 * 1, "Alloy Core", "HyperX", 279.00F, 5, "NÃO", "SIM");
+		 * periferico.adicionarPeriferico(teclado4);
+		 */
 
 		while (true) {
 			System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_RED_BACKGROUND);
@@ -42,9 +60,9 @@ public class Menu {
 			System.out.println("|Digite a opção escolhida:               |");
 			System.out.println("                                          ");
 
-			try{
-			opcao = leia.nextInt();
-			}catch (InputMismatchException e) {
+			try {
+				opcao = leia.nextInt();
+			} catch (InputMismatchException e) {
 				System.out.println("Digite um valor inteiro!");
 				leia.nextLine();
 				opcao = 10;
@@ -61,22 +79,107 @@ public class Menu {
 			switch (opcao) {
 			case 1:
 				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Adicione um periférico\n");
+
+				System.out.println("Digite a marca do periferico:");
+				marcaproduto = leia.next();
+
+				do {
+					System.out.println("Digite o código do tipo do produto: ");
+					tipo = leia.nextInt();
+				} while (tipo != 1);
+
+				System.out.println("Digite o nome do periférico");
+				leia.skip("\\R?");
+				nomeproduto = leia.nextLine();
+
+				System.out.println("Digite o preço do produto (R$):");
+				preco = leia.nextInt();
+
+				System.out.println("Digite a quantidade disponível no estoque:");
+				estoque = leia.nextInt();
+
+				switch (tipo) {
+				case 1 -> {
+					System.out.println("O teclado é mecânico? (SIM/NÃO): ");
+					construcaoteclado = leia.next();
+
+					System.out.println("O teclado possui RGB? (SIM/NÃO): ");
+					rgbteclado = leia.next();
+					periferico.adicionarPeriferico(new PerifericoTeclado(periferico.criarNumero(), tipo, marcaproduto, nomeproduto, preco, estoque, construcaoteclado, construcaoteclado));
+				}
+
+				}
+
 				keyPress();
 				break;
 			case 2:
 				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Liste todos os periféricos\n");
+
+				periferico.listarPerifericos();
+
 				keyPress();
 				break;
 			case 3:
-				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Encontre um periferico pelo ID\n");
+				System.out.println(
+						Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Encontre um periferico pelo ID\n");
+				System.out.println("Entre com o ID do periférico");
+				idproduto = leia.nextInt();
+
+				periferico.encontrarPorID(idproduto);
+
 				keyPress();
 				break;
 			case 4:
 				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Atualização de dados dos periféricos\n");
+
+				System.out.println("Digite o ID do produto");
+				numero = leia.nextInt();
+
+				var procuraColecao = periferico.procurarNaCollection(numero);
+
+				if (procuraColecao != null) {
+					tipo = procuraColecao.getTipo();
+					System.out.println("Digite o nome do periférico");
+					leia.skip("\\R?");
+					nomeproduto = leia.nextLine();
+
+					do {
+						System.out.println("Digite o código do tipo do produto: ");
+						tipo = leia.nextInt();
+					} while (tipo != 1);
+
+					System.out.println("Digite a marca do periferico:");
+					marcaproduto = leia.next();
+
+					System.out.println("Digite o preço do produto (R$):");
+					preco = leia.nextInt();
+
+					System.out.println("Digite a quantidade disponível no estoque:");
+					estoque = leia.nextInt();
+
+					switch (tipo) {
+					case 1 -> {
+						System.out.println("O teclado é mecânico? (SIM/NÃO): ");
+						construcaoteclado = leia.next();
+
+						System.out.println("O teclado possui RGB? (SIM/NÃO): ");
+						rgbteclado = leia.next();
+						periferico.atualizarPeriferico(new PerifericoTeclado(numero, tipo, marcaproduto, nomeproduto,preco, estoque, construcaoteclado, rgbteclado));
+					}
+
+					}
+
+				}
+
 				keyPress();
 				break;
 			case 5:
 				System.out.println(Colors.TEXT_BLACK_BOLD + Colors.ANSI_BLUE_BACKGROUND + "Delete um periférico\n");
+
+				System.out.println("Digite o ID do produto que deseja deletar");
+				numero = leia.nextInt();
+
+				periferico.removerPeriferico(numero);
 				keyPress();
 				break;
 
